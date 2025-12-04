@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hangman</title>
+</head>
+
+<body>  
+    
+    <input type="text" id="inputLetter" placeholder="Insertar una letra">
+    <button type="button" onclick="validacionConPalabra()">Enviar</button>
+    <p id="palabras"></p>
+    <script>
+
+        const words = ["hola", "adios", "Buenos Días"];
+        const palabraElegida = seleccionPalabra();
+        const palabraOculta = ocultarPalabra(palabraElegida);
+
+        console.log("Palabra elegida:", palabraElegida);
+        
+        mostrarEnPantalla(palabraOculta);
+
+        function seleccionPalabra() {
+            return words[Math.floor(Math.random() * words.length)];
+        }
+
+        function ocultarPalabra(palabra) {
+            return palabra.split("").map(char =>
+                char === " " ? " " : "_"
+            );
+        }
+
+        function validacionConPalabra() {
+
+            let letraActual = document.getElementById("inputLetter").value;
+
+            if (letraActual.length !== 1) {
+                console.log("Introduce solo una letra");
+                return;
+            }
+
+            // Revisar coincidencias
+            for (let i = 0; i < palabraElegida.length; i++) {
+                if (palabraElegida.charAt(i).toLowerCase() === letraActual.toLowerCase()) {
+                    palabraOculta[i] = palabraElegida.charAt(i); // Revelar letra
+                }
+            }
+
+            console.log("Estado actual:", palabraOculta.join(" "));
+            mostrarEnPantalla(palabraOculta);
+        }
+
+        function mostrarEnPantalla(arr) {
+            document.body.querySelectorAll(".letras").forEach(remove => remove.remove()); //Elimino todas las letras para no duplicar el proceso de revelacon
+            document.getElementById('palabras').textContent = arr.join(" ");
+        }
+
+    </script>
+</body>
+</html>
