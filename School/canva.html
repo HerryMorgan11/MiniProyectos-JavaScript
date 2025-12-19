@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    canvas {
+        border: 1px solid black;
+    }
+</style>
+
+<script>
+    var canvasH;
+    var canvasW;
+    window.onload = () => {
+       const lienzo = capturarCanvas();
+       fondoEjes(lienzo);
+    }
+
+    function capturarCanvas() {
+        const canvas = document.getElementById("canvas");
+        const lienzo = canvas.getContext("2d");
+        canvas.height = 800;
+        canvas.width = 800;
+        canvasH = canvas.height;
+        canvasW = canvas.width;
+        return lienzo;
+    }
+
+    function fondoEjes(lienzo) {
+        console.log(canvasH + " " + canvasW);
+        lienzo.fillStyle = "rgb(0,0,0)";
+        lienzo.fillRect(0, 0, canvasW, canvasH);
+
+        // Color de los ejes
+        lienzo.strokeStyle = "rgb(0,255,0)";
+        lienzo.lineWidth = 1;
+
+        // Eje Horizontal
+        lienzo.beginPath();
+        lienzo.moveTo(0, canvasH/2);
+        lienzo.lineTo(canvasW, canvasH/2);
+        lienzo.stroke();
+
+        //Marcas Eje X
+        for (let x = 0; x<=canvasW; x = x+10) {
+            lienzo.beginPath();
+            lienzo.moveTo(x, canvasH/2 - 2);
+            lienzo.lineTo(x, canvasH/2 + 2);
+            lienzo.stroke();
+        }
+
+        for (let x = 0; x<=canvasW; x = x+20) {
+            lienzo.beginPath();
+            lienzo.moveTo(x, canvasH/2 - 5);
+            lienzo.lineTo(x, canvasH/2 + 5);
+            lienzo.stroke();
+        }
+
+        //Marcas Eje Y
+        for (let y = 0; y <= canvasH; y = y+10) {
+            lienzo.beginPath();
+            lienzo.moveTo(canvasW/2 - 2, y);
+            lienzo.lineTo(canvasW/2 + 2, y);
+            lienzo.stroke();
+        }
+
+        for (let y = 0; y <= canvasH; y = y+20) {
+            lienzo.beginPath();
+            lienzo.moveTo(canvasW/2 - 5, y);
+            lienzo.lineTo(canvasW/2 + 5, y);
+            lienzo.stroke();
+        }
+
+        // Eje Vertical
+        lienzo.beginPath();
+        lienzo.moveTo(canvasW/2, 0);
+        lienzo.lineTo(canvasW/2, canvasH);
+        lienzo.stroke();
+
+        
+        }
+</script>
+<body>
+    <canvas id="canvas"></canvas>
+</body>
+</html>
