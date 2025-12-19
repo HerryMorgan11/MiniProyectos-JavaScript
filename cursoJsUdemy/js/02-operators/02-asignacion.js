@@ -1,0 +1,10 @@
+let a = 5; 
+a = a + 5;
+a += 5;
+a -= 5;
+a *= 5;
+a /= 5;
+a %= 5;
+a **= 5;
+
+a++; // Aumentamos valor en 1
